@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="GtInterviewQ2.Views.FilteredValuesGroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <xctk:BusyIndicator BusyContent="Rendering..." IsBusy="{Binding IsRebuilding}">
+        <xctk:BusyIndicator.Resources>
+            <CollectionViewSource x:Key="colectionView" Source="{Binding FlatData}">
+            </CollectionViewSource>
+        </xctk:BusyIndicator.Resources>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Source={StaticResource colectionView}}" Name="ValuesDataGrid" >
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="groupHeader">
+                                <ContentControl ContentTemplate="{DynamicResource GroupedHeaders}" />
+                                <!--<ContentControl>
+                                    <ContentControl.ContentTemplate>
+                                        <DataTemplate >
+                                            <StackPanel Orientation="Horizontal" Background="LightSteelBlue">
+                                                <TextBlock Text="{Binding DataContext.Name, RelativeSource={RelativeSource AncestorType=ContentControl}}" Foreground="White" Margin="5 2 25 2" FontWeight="Bold"/>
+                                                <TextBlock Text="NAV" Margin="5 2 2 2" />
+                                                <TextBlock Text="{Binding Path=DataContext.Items, RelativeSource={RelativeSource AncestorType=ContentControl}, Converter={StaticResource GroupAggregationConverter}, ConverterParameter='NAV'}" Foreground="White" Margin="5 2 5 2"/>
+                                                <TextBlock Text="Qty" Margin="5 2 2 2" />
+                                                <TextBlock Text="{Binding Path=DataContext.Items, RelativeSource={RelativeSource AncestorType=ContentControl}, Converter={StaticResource GroupAggregationConverter}, ConverterParameter='Qty'}" Foreground="White" Margin="5 2 5 2"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ContentControl.ContentTemplate>
+                                </ContentControl>-->
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+        </DataGrid>
+    </xctk:BusyIndicator>
+</UserControl>

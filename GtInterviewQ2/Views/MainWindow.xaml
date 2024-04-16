@@ -1,0 +1,56 @@
+﻿<Window x:Class="GtInterviewQ2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:GtInterviewQ2.Views"
+        mc:Ignorable="d"
+        Title="Q2 Viewer" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" VerticalAlignment="Stretch">
+                <GroupBox Header="Fields" FontWeight="Bold" DockPanel.Dock="Top">
+                    <views:FieldChooser DataContext="{Binding Path=FieldSelections}"/>
+                </GroupBox>
+                <GroupBox Header="Group By" FontWeight="Bold" DockPanel.Dock="Top">
+                    <ComboBox ItemsSource="{Binding FilteredValuesGroupViewModel.GroupByColumns}"
+                          SelectedItem="{Binding FilteredValuesGroupViewModel.SelectedGroupBy}"/>
+                </GroupBox>
+                <GroupBox Header="Hierarchy" FontWeight="Bold" DockPanel.Dock="Top">
+                    <views:HierarchyChooser DataContext="{Binding}"/>
+                </GroupBox>
+            </DockPanel>
+            <Button Height="23" Grid.Row="2" Command="{Binding Path=RefreshCommand}">Refresh Data</Button>
+        </Grid>
+        <GridSplitter Grid.Column="1" Grid.Row="0"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Stretch"
+              Background="DarkSlateGray" 
+              ShowsPreview="True"
+              Width="3"
+              />
+        <views:FilteredValuesGroupView Grid.Column="2" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" DataContext="{Binding Path=FilteredValuesGroupViewModel}"/>
+
+        <StatusBar Grid.Row="1" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch" 
+                   Grid.ColumnSpan="3"
+                   FlowDirection="RightToLeft" HorizontalContentAlignment="Right">
+            <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                <ProgressBar Name="bar" Width="100" Height="21" IsIndeterminate="True" />
+                <TextBlock Text="Loading" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+        </StatusBar>
+    </Grid>
+</Window>

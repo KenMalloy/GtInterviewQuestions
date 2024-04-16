@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="GtInterviewQ2.Views.HierarchyChooser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wrapper="clr-namespace:GtInterviewQ2.Models.GuiWrapper"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type wrapper:LevelSelectionState}" ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="True"/>
+                <TextBlock Text="{Binding LevelLabel}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <TreeView ItemsSource="{Binding LevelSelections}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+</UserControl>
