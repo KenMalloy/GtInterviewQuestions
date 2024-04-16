@@ -256,6 +256,9 @@ group by l.GroupableLevelId, l.GroupLabel
 
 GO
 
+DROP PROCEDURE IF EXISTS [q2].[GetGroupValues]
+GO
+
 DROP TYPE IF EXISTS dbo.IntIdTableType;
 GO
 
@@ -264,9 +267,6 @@ CREATE TYPE dbo.IntIdTableType AS TABLE
 	IntId INT NOT NULL
 );
 
-GO
-
-DROP PROCEDURE IF EXISTS [q2].[GetGroupValues]
 GO
 
 DROP TYPE IF EXISTS dbo.StringTableType;
@@ -301,3 +301,12 @@ BEGIN
 END
 
 GO
+
+--more tests
+--exec [q2].[InsertGroupableLevel] 'Sub 10', 'Group3'
+--exec [q2].[InsertGroupableLevel] 'Acct #16', 'Sub 10'
+--exec [q2].[InsertGroupableLevel] 'SubAcct #1', 'Acct #16'
+--exec [q2].[InsertGroupableLevel] 'SubAcct #2', 'Acct #16'
+--exec [q2].[InsertGroupableValue] 'SubAcct #1', 'Beta', 22.5
+--exec [q2].[InsertGroupableValue] 'SubAcct #2', 'Beta', 37.5
+----exec [q2].[InsertGroupableValue] 'Acct #16', 'Qty', 1

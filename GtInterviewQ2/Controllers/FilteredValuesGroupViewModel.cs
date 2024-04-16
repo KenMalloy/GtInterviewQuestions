@@ -273,7 +273,6 @@ namespace GtInterviewQ2.Controllers
                             return ancestor.LevelLabel;
                         }
                     }
-                    throw new Exception();
                 }
                 ancestors.Push(node);
                 foreach (var child in node.Children)
